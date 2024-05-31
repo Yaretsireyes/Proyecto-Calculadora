@@ -1,106 +1,89 @@
-// variable para guardar el primer numero ingresado.
-let primerNumero = 0
-// variable para guardar el segundo numero ingresado
-let segundoNumero = 0
-//variable para declarar un signo y hacer la operacion
-let signo = '';
-
-const buttonOne = document.querySelector('.button-one')
-const buttonTwo = document.querySelector('.button-two')
-const buttonThree = document.querySelector('.button-three')
-const signoSuma = document.querySelector('.signo-suma')
-const buttonFour = document.querySelector('.button-four')
-const buttonFive = document.querySelector('.button-five')
-const buttonSix = document.querySelector('.button-six')
-const signoMultiplicar = document.querySelector('.signo-multiplicar')
-const buttonSeven = document.querySelector('.button-seven')
-const buttonEight = document.querySelector('.button-eight')
-const buttonNine = document.querySelector('.button-nine')
-const signoDivision = document.querySelector('.signo-division')
-const buttonZero = document.querySelector('.button-zero')
-const buttonEliminar = document.querySelector('.button-eliminar')
-const signoIgual = document.querySelector('.signo-igual')
-const signoMenos = document.querySelector('.signo-menos')
-
-const input = document.querySelector('.input-Guardar')
-
-buttonOne.addEventListener('click', () => {
-    input.value += '1'
-})
-buttonTwo.addEventListener('click', () => {
-    input.value += '2'
-})
-buttonThree.addEventListener('click', () => {
-    input.value += '3'
+let numeros = document.querySelectorAll('.number');
+let input = document.querySelector('.input-Guardar');
+let btnsAccion = document.querySelectorAll('.signo')
+let primerNumero = 0;
+let segundoNumero = 0;
+let acumulador = 0
+let acumuladorMT = 1
+let signo = ''
+let primeraVez = true;
+numeros.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        input.value += btn.value
+    })
 })
 
-buttonFour.addEventListener('click', () => {
-    input.value += '4'
-})
-buttonFive.addEventListener('click', () => {
-    input.value += '5'
-})
-buttonSix.addEventListener('click', () => {
-    input.value += '6'
-})
+btnsAccion.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+        if (e.target.value == '+') {
+            primerNumero = parseInt(input.value)
+            acumulador = acumulador + primerNumero
+            input.value = ''
+            signo = e.target.value
 
-buttonSeven.addEventListener('click', () => {
-    input.value += '7'
-})
-buttonEight.addEventListener('click', () => {
-    input.value += '8'
-})
-buttonNine.addEventListener('click', () => {
-    input.value += '9'
-})
+        }
+        else if (e.target.value == '*') {
+            primerNumero = parseInt(input.value)
+            acumuladorMT = acumuladorMT * primerNumero
+            input.value = ''
+            signo = e.target.value
 
-buttonZero.addEventListener('click', () => {
-    input.value += '0'
-})
-buttonEliminar.addEventListener('click', () => {
-    input.value = ''
-})
-signoSuma.addEventListener('click', () => {
-    primerNumero = input.value
-    input.value = ''
-    console.log(primerNumero)
-    signo = '+'
-})
+        } else if (e.target.value == '/') {
+            if (primeraVez) {
+                acumulador = acumulador + primerNumero
+                primeraVez = false;
+            } else {
+                acumulador = acumulador / primerNumero
+                console.log(acumulador = acumulador / primerNumero)
+            }
+            input.value = ''
+            signo = e.target.value
 
-signoMultiplicar.addEventListener('click', () => {
-    primerNumero = input.value
-    input.value = ''
-    signo = '*'
-})
-signoMenos.addEventListener('click', () => {
-    primerNumero = input.value
-    input.value = ''
-    signo = '-'
-})
-signoDivision.addEventListener('click', () => {
-    primerNumero = input.value
-    input.value = ''
-    signo = '/'
-})
-signoIgual.addEventListener('click', () => {
-    segundoNumero = input.value
+        } else if (e.target.value == '-') {
+            if (primeraVez) {
+                acumulador = primerNumero - Math.abs(acumulador)
+                primeraVez = false;
+            } else if (acumulador >= 0) {
+                acumulador = Math.abs(acumulador) - primerNumero
+            }
+            input.value = ''
+            signo = e.target.value
+        }
+        //segunda operacion
+        else if (e.target.value == '=') {
+            if (signo == '+') {
+                segundoNumero = parseInt(input.value)
+                let resultado = acumulador + segundoNumero;
+                input.value = resultado
 
-    if (signo == '+') {
-        resultado = parseInt(primerNumero) + parseInt(segundoNumero)
-        input.value = resultado
-    }else if (signo == '-') {
-        resultado = parseInt(primerNumero) - parseInt(segundoNumero)
-        input.value = resultado
+            } else if (signo == '-') {
+                segundoNumero = parseInt(input.value)
+                let resultado = acumulador - segundoNumero;
+                primeraVez = true;
+                input.value = resultado
 
-    } else if (signo == '*') {
-        resultado = parseInt(primerNumero) * parseInt(segundoNumero)
-        input.value = resultado
-
-    } else if (signo == '/') {
-        resultado = parseInt(primerNumero) / parseInt(segundoNumero)
-        input.value = resultado
-    }
-})
+            } else if (signo == '/') {
+                segundoNumero = parseInt(input.value)
+                console.log(segundoNumero)
+                let resultado = acumulador / segundoNumero;
+                primeraVez = true
+                input.value = resultado
+                console.log(resultado)
 
 
+            } else if (signo == '*') {
+                segundoNumero = parseInt(input.value)
+                console.log(segundoNumero)
+                let resultado = acumuladorMT * segundoNumero;
+                input.value = resultado
 
+            }
+            acumulador = 0
+            acumuladorMT = 1
+
+        }
+        else if (e.target.value == 'limpiar') {
+            input.value = ''
+        }
+    })
+})

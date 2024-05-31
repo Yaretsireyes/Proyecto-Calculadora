@@ -39,7 +39,6 @@ body {
     box-shadow: 0 0px 16px 9px rgb(240, 105, 127);
 }
 
-
 .input-Guardar {
     margin: 15px 0px 0px 0px;
     outline: none;
@@ -52,14 +51,13 @@ body {
     border-color: rgb(202, 21, 82);
 }
 
-.number {
+.number, .signo, .limpiar{
     border-radius: 13px;
     border: 2px solid rgb(238, 103, 125);
     width: 15%;
     height: 60px;
     margin: 40px 10px 11px 20px;
     box-shadow: 0 0px 15px 3px rgb(236, 97, 120);
-    
 }
 
 .number:hover {
