@@ -15,42 +15,42 @@ numeros.forEach((btn) => {
 
 btnsAccion.forEach((btn) => {
     btn.addEventListener('click', (e) => {
-        if (e.target.value == '+') {
+        if (e.target.value == '/' || e.target.value == '+'
+            || e.target.value == '-' || e.target.value == '*') {
             primerNumero = parseInt(input.value)
-            acumulador = acumulador + primerNumero
-            input.value = ''
-            signo = e.target.value
 
-        }
-        else if (e.target.value == '*') {
-            primerNumero = parseInt(input.value)
-            acumuladorMT = acumuladorMT * primerNumero
-            input.value = ''
-            signo = e.target.value
-
-        } else if (e.target.value == '/') {
-            if (primeraVez) {
-                acumulador = acumulador + primerNumero
-                primeraVez = false;
-            } else {
-                acumulador = acumulador / primerNumero
-                console.log(acumulador = acumulador / primerNumero)
+            switch (e.target.value) {
+                case '+':
+                    acumulador = acumulador + primerNumero
+                    break;
+                case '-':
+                    if (primeraVez) {
+                        acumulador = primerNumero - Math.abs(acumulador)
+                        primeraVez = false
+                    }
+                    else if (acumulador >= 0) {
+                        acumulador = Math.abs(acumulador) - primerNumero
+                    } else {
+                        acumulador = acumulador - primerNumero
+                    }
+                    break;
+                case '*':
+                    acumuladorMT = acumuladorMT * primerNumero
+                    break;
+                case '/':
+                    if (primeraVez) {
+                        acumulador = acumulador + primerNumero;
+                        primeraVez = false
+                    } else {
+                        acumulador = acumulador / primerNumero
+                    }
+                    break;
             }
             input.value = ''
             signo = e.target.value
 
-        } else if (e.target.value == '-') {
-            if (primeraVez) {
-                acumulador = primerNumero - Math.abs(acumulador)
-                primeraVez = false;
-            } else if (acumulador >= 0) {
-                acumulador = Math.abs(acumulador) - primerNumero
-            }
-            input.value = ''
-            signo = e.target.value
-        }
-        //segunda operacion
-        else if (e.target.value == '=') {
+            //segunda operacion
+        } else if (e.target.value == '=') {
             if (signo == '+') {
                 segundoNumero = parseInt(input.value)
                 let resultado = acumulador + segundoNumero;
@@ -64,19 +64,14 @@ btnsAccion.forEach((btn) => {
 
             } else if (signo == '/') {
                 segundoNumero = parseInt(input.value)
-                console.log(segundoNumero)
                 let resultado = acumulador / segundoNumero;
                 primeraVez = true
                 input.value = resultado
-                console.log(resultado)
-
 
             } else if (signo == '*') {
                 segundoNumero = parseInt(input.value)
-                console.log(segundoNumero)
                 let resultado = acumuladorMT * segundoNumero;
                 input.value = resultado
-
             }
             acumulador = 0
             acumuladorMT = 1
