@@ -51,7 +51,7 @@ body {
     border-color: rgb(202, 21, 82);
 }
 
-.number, .signo, .limpiar{
+.number, .signo, .clear{
     border-radius: 13px;
     border: 2px solid rgb(238, 103, 125);
     width: 15%;
