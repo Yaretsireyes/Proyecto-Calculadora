@@ -41,7 +41,6 @@ const division = () => {
         acumulador = acumulador / primerNumero
     }
 }
-//
 const igual = () => {
     if (signo == '+') {
         segundoNumero = parseInt(input.value)
@@ -73,7 +72,7 @@ btnsAccion.forEach((btn) => {
         if (input.value == '') {
             alert('INGRESE UN NUMERO')
         }
-        if (e.target.value != '=') {
+        else if (e.target.value != '=') {
 
             primerNumero = parseInt(input.value)
 
@@ -119,7 +118,7 @@ btnsAccion.forEach((btn) => {
         }
     })
 })
-//
+
 clear.addEventListener('click', () => {
     input.value = ''
     primerNumero = 0;
